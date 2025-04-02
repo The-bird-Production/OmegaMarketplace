@@ -2,4 +2,5 @@
 .env
 /node_modules
 /validated_plugins
+/validated_themes
 /temp_zip
