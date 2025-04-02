@@ -1,4 +1,21 @@
 {
+  "name": "omegapluginmarketplace",
+  "version": "1.0.0",
+  "description": "A simple Marketplace for omega CMS",
+  "homepage": "https://github.com/The-bird-Production/OmegaPluginMarketplace#readme",
+  "bugs": {
+    "url": "https://github.com/The-bird-Production/OmegaPluginMarketplace/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-bird-Production/OmegaPluginMarketplace.git"
+  },
+  "license": "ISC",
+  "author": "Etienne Maleville",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "archiver": "^7.0.1",
     "axios": "^1.7.9",
