@@ -2,6 +2,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const RateLimit = require("express-rate-limit");
 
 const VALIDATED_THEME_DIR = path.join(__dirname, "validated_themes");
 const VALIDATED_PLUGIN_DIR = path.join(__dirname, "validated_plugins");
@@ -17,10 +18,15 @@ require("dotenv").config(); // For loading environment variables
 const app = express();
 const PORT = 3002;
 
+const limiter = RateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // max 100 requests per windowMs
+  });
 
 app.use("/plugins", pluginsRoute);
 app.use("/themes", themeRoute);
 app.use("/download", downloadRoute);
+app.use(limiter); 
 // Start the server
 app.listen(PORT, () => {
   console.log(`Marketplace server running on port ${PORT}`);
