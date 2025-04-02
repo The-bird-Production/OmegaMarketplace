@@ -2,7 +2,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const RateLimit = require("express-rate-limit");
+const rateLimit = require("express-rate-limit");
 
 const VALIDATED_THEME_DIR = path.join(__dirname, "validated_themes");
 const VALIDATED_PLUGIN_DIR = path.join(__dirname, "validated_plugins");
@@ -18,15 +18,30 @@ require("dotenv").config(); // For loading environment variables
 const app = express();
 const PORT = 3002;
 
-const limiter = RateLimit({
+const rateLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // max 100 requests per windowMs
+    max: 100, // Limite à 100 requêtes par fenêtre de temps
+    message: {
+      success: false,
+      error: "Trop de requêtes. Veuillez réessayer plus tard.",
+    },
+    headers: true, // Inclure les headers RateLimit
+    keyGenerator: (req) => req.ip, // Utilisation de l'IP comme clé
+    skip: (req) => req.user && req.user.role === "admin", // Exclure les admins
+    handler: (req, res, next) => {
+      console.warn(`Rate limit dépassé pour ${req.ip}`);
+      res.status(429).json({
+        success: false,
+        error: "Trop de requêtes. Réessayez plus tard.",
+      });
+    },
   });
 
+app.use(rateLimiter); 
 app.use("/plugins", pluginsRoute);
 app.use("/themes", themeRoute);
 app.use("/download", downloadRoute);
-app.use(limiter); 
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Marketplace server running on port ${PORT}`);
