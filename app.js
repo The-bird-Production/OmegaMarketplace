@@ -10,7 +10,7 @@ const downloadAndExtractValidatedPlugins = require("./App/Plugins/downloadAndExt
 const downloadAndExtractValidatedThemes = require("./App/Theme/downloadAndExtract");
 //Routes
 const pluginsRoute = require("./App/Plugins/pluginsRoute");
-const themeRoute = require("./App/Theme/ThemeRoute");
+const themeRoute = require("./App/Theme/themeRoute");
 const downloadRoute = require("./App/Download/DownloadRoute");
 
 require("dotenv").config(); // For loading environment variables
