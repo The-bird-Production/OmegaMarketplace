@@ -22,7 +22,7 @@ Chaque plugin doit suivre cette structure minimale :
 
 ```
 
-### 🔧 Configuration (`config.json`)
+### 🔧 Configuration d'un plugin (`plugin.json`)
 ```json
 {
   "id": "randomuid",
@@ -33,24 +33,69 @@ Chaque plugin doit suivre cette structure minimale :
   "url": "/example-plugin"
 }
 ```
+## 🚀 Créer un Theme
 
-## 📥 Soumettre un Plugin
-Si vous souhaitez partager votre plugin avec la communauté, voici la procédure :
+Un theme est un module autonome qui peut être installé et utilisé dans **Project Omega CMS** sans redémarrer le serveur.
+
+### 📦 Structure d’un theme
+Chaque plugin doit suivre cette structure minimale :
+```
+    example-theme
+   ├─ asset
+   │  └─ Vos assets
+   ├─ Components
+   │  └─ Vos components
+   ├─ style
+   │  └─ style.css
+   └─ theme.json
+  
+
+```
+### 🔧 Configuration d'un theme (`theme.json`)
+```json
+{
+  "id": "randomuid",
+  "name": "Example Theme",
+  "description": "A simple example theme for OMEGA CMS.",
+  "version": "1.0.0",
+  "author": "Your Name",
+  "config": {
+    //You can add all of your config and your components
+    "fonts": {
+      "body": "Roboto, sans-serif",
+      "heading": "Montserrat, sans-serif"
+    },
+    "layout": {
+      "header": "default",
+      "footer": "default",
+      "buttonStyle": "rounded"
+    },
+    "components": {
+      "header": "./components/Header.js",
+      "footer": "./components/Footer.js",
+      "button": "./components/Button.js"
+    }
+  }
+}
+```
+
+## 📥 Soumettre un Plugin ou un Theme
+Si vous souhaitez partager votre plugin ou votre theme avec la communauté, voici la procédure :
 
 ### 🛠 Étapes pour proposer un plugin :
 1. **Forker ce repository**.
-2. **Créer un dossier** dans `plugins/` avec le nom de votre plugin.
-3. **Ajouter votre plugin** en respectant la structure décrite plus haut.
-4. **Créer une Pull Request** en expliquant votre plugin et ses fonctionnalités.
+2. **Créer un dossier** dans `plugins/` ou`theme/`  avec le nom de votre plugin ou votre theme.
+3. **Ajouter votre plugin ou theme** en respectant la structure décrite plus haut.
+4. **Créer une Pull Request** en expliquant votre plugin ou votre theme et ses fonctionnalités.
 
 ## 💡 Bonnes Pratiques
-- Documentez bien votre plugin dans `README.md`.
-- Testez votre plugin avant de le soumettre.
-- Respectez la structure standard des plugins.
+- Documentez bien votre plugin ou votre theme avec un `README.md`.
+- Testez votre plugin ou votre theme avant de le soumettre.
+- Respectez la structure standard des plugins ou des themes.
 
 ## 📄 Licence
-Votre plugin doit être sous une licence libre compatible avec Project Omega CMS (MIT, GPL, etc.).
+Votre plugin ou vote theme doit être sous une licence libre compatible avec Project Omega CMS (MIT, GPL, etc.).
 
 ---
-Rejoignez la communauté et enrichissez Project Omega CMS avec de nouveaux plugins ! 🚀
+Rejoignez la communauté et enrichissez Project Omega CMS avec de nouveaux plugins ou thèmes ! 🚀
 
