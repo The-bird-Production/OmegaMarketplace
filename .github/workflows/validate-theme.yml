@@ -20,7 +20,7 @@ jobs:
     - name: Validate Theme structure
       run: |
         mkdir -p validated_themes
-        for theme in themes/*; do
+        for theme in themes/*/; do
           if [ -d "$theme" ]; then
             echo "Validating $theme"
             if [ ! -f "$theme/theme.json" ] || [ ! -d "$theme/components" ] || [ ! -d "$theme/style" ] || [ ! -d "$theme/asset" ] || [ ! -f "$theme/style/style.css" ]; then
