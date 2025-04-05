@@ -35,13 +35,37 @@ jobs:
         mkdir -p validated_themes
         for theme in themes/*/; do
           if [ -d "$theme" ]; then
-            echo "Validating $theme"
-            if [ ! -f "$theme/theme.json" ] || [ ! -d "$theme/components" ] || [ ! -d "$theme/style" ] || [ ! -d "$theme/asset" ] || [ ! -f "$theme/style/style.css" ]; then
+            echo "🔍 Validating $theme"
+            MISSING=0
+
+            if [ ! -f "$theme/theme.json" ]; then
+              echo "❌ Missing: $theme/theme.json"
+              MISSING=1
+            fi
+            if [ ! -d "$theme/components" ]; then
+              echo "❌ Missing: $theme/components/"
+              MISSING=1
+            fi
+            if [ ! -d "$theme/style" ]; then
+              echo "❌ Missing: $theme/style/"
+              MISSING=1
+            fi
+            if [ ! -f "$theme/style/style.css" ]; then
+              echo "❌ Missing: $theme/style/style.css"
+              MISSING=1
+            fi
+            if [ ! -d "$theme/asset" ]; then
+              echo "❌ Missing: $theme/asset/"
+              MISSING=1
+            fi
+
+            if [ "$MISSING" -eq 1 ]; then
               echo "❌ Invalid structure for $theme"
               exit 1
+            else
+              echo "✅ Structure OK for $theme"
+              cp -r "$theme" validated_themes/
             fi
-            echo "✅ Structure OK for $theme"
-            cp -r "$theme" validated_themes/
           fi
         done
 
