@@ -53,7 +53,7 @@ app.listen(PORT, () => {
   }
 
   downloadAndExtractValidatedPlugins(); // Initial download of plugins
-  downloadAndExtractValidatedPlugins(); // Initial download of plugins
+  downloadAndExtractValidatedThemes(); // Initial download of plugins
   setInterval(downloadAndExtractValidatedPlugins, 600000); // Refresh every ten minutes
   setInterval(downloadAndExtractValidatedThemes, 600000); // Refresh every ten minutes
 });
