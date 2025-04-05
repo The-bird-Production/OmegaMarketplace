@@ -23,8 +23,8 @@ jobs:
         for theme in themes/*; do
           if [ -d "$theme" ]; then
             echo "Validating $theme"
-            if [ ! -f "$theme/theme.json" ] || [ ! -d "$theme/components" ] || [ ! -d "$theme/style" ] || [ ! -d "$plugin/asset" ] || [ ! -f "$theme/style/style.css" ]; then
-              echo "Invalid structure for $plugin"
+            if [ ! -f "$theme/theme.json" ] || [ ! -d "$theme/components" ] || [ ! -d "$theme/style" ] || [ ! -d "$theme/asset" ] || [ ! -f "$theme/style/style.css" ]; then
+              echo "Invalid structure for $theme"
               exit 1
             fi
             cp -r "$theme" validated_themes/
