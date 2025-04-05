@@ -17,6 +17,19 @@ jobs:
       run: |
         sudo apt-get install -y unzip
 
+    - name: Debug listing
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Listing themes/"
+        ls -l themes/
+        for theme in themes/*/; do
+          echo "Checking theme: $theme"
+          ls -l "$theme"
+          echo "Content of style folder:"
+          ls -l "$theme/style" || echo "No style folder"
+        done
+
     - name: Validate Theme structure
       run: |
         mkdir -p validated_themes
@@ -24,12 +37,14 @@ jobs:
           if [ -d "$theme" ]; then
             echo "Validating $theme"
             if [ ! -f "$theme/theme.json" ] || [ ! -d "$theme/components" ] || [ ! -d "$theme/style" ] || [ ! -d "$theme/asset" ] || [ ! -f "$theme/style/style.css" ]; then
-              echo "Invalid structure for $theme"
+              echo "❌ Invalid structure for $theme"
               exit 1
             fi
+            echo "✅ Structure OK for $theme"
             cp -r "$theme" validated_themes/
           fi
         done
+
     - name: Upload validated themes
       uses: actions/upload-artifact@v4
       with:
